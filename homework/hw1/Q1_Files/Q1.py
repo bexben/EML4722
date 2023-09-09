@@ -1,12 +1,14 @@
 import numpy as np
 import os
 import subprocess
+import pandas as pd
 
+history_filename = '/home/bexben/school/CFD/homework/hw1/Q1_Files/history.csv'
 cfg_filename = '/home/bexben/school/CFD/homework/hw1/Q1_Files/inv_NACA0012.cfg'
 cfg_child_filename = '/home/bexben/school/CFD/homework/hw1/Q1_Files/inv_NACA0012_child.cfg'
 
 variable = 'AOA' # variable to be edited
-var_range = np.linspace(0, 15, 2) # values to test
+var_range = np.linspace(0, 15, 16) # values to test
 
 
 def edit_line(variable, var_value) -> int:
@@ -29,15 +31,21 @@ def edit_line(variable, var_value) -> int:
     
     return num_edits
 
+'''
+def log_output(variable, var_value):
+    file = pd.read_csv(history_filename)
+    last_line = file.iloc[-1].values
 
+
+'''
 def run_tests(variable, var_range):
     for index, var_value in enumerate(var_range):
-        # First one must set the variable
-        edit_line(variable, var_value)
+        history_path_edited = history_filename[:-4] + '_' + variable + str(var_value)
+        edit_line(variable, var_value) # First one must set the variable
+        edit_line('CONV_FILENAME', history_path_edited)
 
         # now we must run the file
         output = subprocess.run(['SU2_CFD', cfg_child_filename], check=True, text=True)
-
 
 
 def main():
