@@ -3,6 +3,7 @@ import os
 import subprocess
 import pandas as pd
 
+# TODO: use path inside pathlib library rather than this shit
 history_filename = '/home/bexben/school/CFD/homework/hw1/Q1_Files/iterations/history.csv'
 cfg_filename = '/home/bexben/school/CFD/homework/hw1/Q1_Files/inv_NACA0012.cfg'
 cfg_child_filename = '/home/bexben/school/CFD/homework/hw1/Q1_Files/inv_NACA0012_child.cfg'
@@ -32,12 +33,11 @@ def edit_line(variable_list, var_value_list) -> int:
     
     return num_edits
 
+# to be worked on later if i really want to make this into a library
 '''
 def log_output(variable, var_value):
     file = pd.read_csv(history_filename)
     last_line = file.iloc[-1].values
-
-
 '''
 def run_tests(variable, var_range):
     for index, var_value in enumerate(var_range):
