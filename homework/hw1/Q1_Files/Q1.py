@@ -43,9 +43,6 @@ def run_tests(variable, var_range):
     for index, var_value in enumerate(var_range):
         history_path_edited = history_filename[:-4] + '_' + variable + str(var_value)
         flow_filename_edited = flow_filename + '_' + variable + str(var_value)
-        '''edit_line(variable, var_value) # First one must set the variable
-        edit_line('CONV_FILENAME', history_path_edited)
-        edit_line('VOLUME_FILENAME', flow_filename_edited)'''
 
         edits = edit_line([variable, 'CONV_FILENAME', 'VOLUME_FILENAME'], [var_value, history_path_edited, flow_filename_edited])
 
